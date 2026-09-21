@@ -1,0 +1,177 @@
+{
+  "info": {
+    "_postman_id": "91229491-773a-4b3b-b11f-394e9e124f26",
+    "name": "Minggu 2 — Eksplorasi HTTP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58142712"
+  },
+  "item": [
+    {
+      "name": "01 Request Anatomy",
+      "item": [
+        {
+          "name": "02 Status Codes",
+          "item": [
+            {
+              "name": "Success",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{status_base_url}}/status/200",
+                  "host": [
+                    "{{status_base_url}}"
+                  ],
+                  "path": [
+                    "status",
+                    "200"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Bad Request",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{status_base_url}}/status/400",
+                  "host": [
+                    "{{status_base_url}}"
+                  ],
+                  "path": [
+                    "status",
+                    "400"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Not Found",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{status_base_url}}/status/404",
+                  "host": [
+                    "{{status_base_url}}"
+                  ],
+                  "path": [
+                    "status",
+                    "404"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "GET Echo Query Parameters.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{echo_base_url}}/get?search=laravel api&page=2",
+              "host": [
+                "{{echo_base_url}}"
+              ],
+              "path": [
+                "get"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "laravel api"
+                },
+                {
+                  "key": "page",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Echo Custom Header",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response is JSON\", function () {\r\n    pm.response.to.be.json;\r\n});\r\n\r\npm.test(\"Custom header was received\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.headers[\"x-student-client\"]).to.eql(\"postman-week-2\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Student-Client",
+                "value": "postman-week-2"
+              }
+            ],
+            "url": {
+              "raw": "{{echo_base_url}}/get",
+              "host": [
+                "{{echo_base_url}}"
+              ],
+              "path": [
+                "get"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Too Many Requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{status_base_url}}/status/429",
+              "host": [
+                "{{status_base_url}}"
+              ],
+              "path": [
+                "status",
+                "429"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "echo_base_url",
+      "value": ""
+    },
+    {
+      "key": "status_base_url",
+      "value": ""
+    }
+  ]
+}

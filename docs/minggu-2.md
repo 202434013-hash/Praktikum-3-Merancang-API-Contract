@@ -14,6 +14,7 @@ localhost:3000.
 Perubahan yang dilakukan meliputi pembuatan project Node.js,
 instalasi Express, dan pembuatan server API menggunakan file
 server.js.
+ END POINT YANG SAYA BUAT ADALAH 
 
 API memiliki beberapa endpoint untuk pengujian status code:
 

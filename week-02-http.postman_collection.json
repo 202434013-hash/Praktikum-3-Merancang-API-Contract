@@ -30,13 +30,8 @@
                 "header": [],
                 "url": {
                   "raw": "{{status_base_url}}/status/200",
-                  "host": [
-                    "{{status_base_url}}"
-                  ],
-                  "path": [
-                    "status",
-                    "200"
-                  ]
+                  "host": ["{{status_base_url}}"],
+                  "path": ["status", "200"]
                 }
               },
               "response": []
@@ -48,13 +43,8 @@
                 "header": [],
                 "url": {
                   "raw": "{{status_base_url}}/status/400",
-                  "host": [
-                    "{{status_base_url}}"
-                  ],
-                  "path": [
-                    "status",
-                    "400"
-                  ]
+                  "host": ["{{status_base_url}}"],
+                  "path": ["status", "400"]
                 }
               },
               "response": []
@@ -66,13 +56,8 @@
                 "header": [],
                 "url": {
                   "raw": "{{status_base_url}}/status/404",
-                  "host": [
-                    "{{status_base_url}}"
-                  ],
-                  "path": [
-                    "status",
-                    "404"
-                  ]
+                  "host": ["{{status_base_url}}"],
+                  "path": ["status", "404"]
                 }
               },
               "response": []
@@ -86,12 +71,8 @@
             "header": [],
             "url": {
               "raw": "{{echo_base_url}}/get?search=laravel api&page=2",
-              "host": [
-                "{{echo_base_url}}"
-              ],
-              "path": [
-                "get"
-              ],
+              "host": ["{{echo_base_url}}"],
+              "path": ["get"],
               "query": [
                 {
                   "key": "search",
@@ -133,12 +114,8 @@
             ],
             "url": {
               "raw": "{{echo_base_url}}/get",
-              "host": [
-                "{{echo_base_url}}"
-              ],
-              "path": [
-                "get"
-              ]
+              "host": ["{{echo_base_url}}"],
+              "path": ["get"]
             }
           },
           "response": []
@@ -150,13 +127,8 @@
             "header": [],
             "url": {
               "raw": "{{status_base_url}}/status/429",
-              "host": [
-                "{{status_base_url}}"
-              ],
-              "path": [
-                "status",
-                "429"
-              ]
+              "host": ["{{status_base_url}}"],
+              "path": ["status", "429"]
             }
           },
           "response": []

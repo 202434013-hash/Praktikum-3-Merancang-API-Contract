@@ -36,15 +36,15 @@ Resource `books` digunakan untuk merepresentasikan data buku pada Library API.
 
 Resource dictionary menjelaskan field yang digunakan oleh resource `books`.
 
-| Field | Tipe Data | Wajib | Keterangan |
-|---|---|---|---|
-| `id` | integer | Ya | ID unik buku |
-| `title` | string | Ya | Judul buku |
-| `author` | string | Ya | Nama penulis buku |
-| `isbn` | string | Ya | Nomor ISBN buku |
-| `published_year` | integer | Ya | Tahun terbit buku |
-| `description` | string | Tidak | Deskripsi singkat buku |
-| `category` | string | Tidak | Kategori buku |
+| Field            | Tipe Data | Wajib | Keterangan             |
+| ---------------- | --------- | ----- | ---------------------- |
+| `id`             | integer   | Ya    | ID unik buku           |
+| `title`          | string    | Ya    | Judul buku             |
+| `author`         | string    | Ya    | Nama penulis buku      |
+| `isbn`           | string    | Ya    | Nomor ISBN buku        |
+| `published_year` | integer   | Ya    | Tahun terbit buku      |
+| `description`    | string    | Tidak | Deskripsi singkat buku |
+| `category`       | string    | Tidak | Kategori buku          |
 
 Resource dictionary memiliki tujuh field sebagai acuan untuk request, response, dan validasi.
 
@@ -54,13 +54,13 @@ Resource dictionary memiliki tujuh field sebagai acuan untuk request, response, 
 
 API contract menggunakan lima endpoint berikut:
 
-| No | Method | Endpoint | Fungsi | Success Response | Error Response |
-|---|---|---|---|---|---|
-| 1 | GET | `/api/books` | Menampilkan daftar buku | 200 OK | - |
-| 2 | POST | `/api/books` | Membuat buku baru | 201 Created | 422 Unprocessable Entity |
-| 3 | GET | `/api/books/{id}` | Menampilkan detail buku | 200 OK | 404 Not Found |
-| 4 | PUT | `/api/books/{id}` | Memperbarui data buku | 200 OK | 404 / 422 |
-| 5 | DELETE | `/api/books/{id}` | Menghapus data buku | 204 No Content | 404 Not Found |
+| No  | Method | Endpoint          | Fungsi                  | Success Response | Error Response           |
+| --- | ------ | ----------------- | ----------------------- | ---------------- | ------------------------ |
+| 1   | GET    | `/api/books`      | Menampilkan daftar buku | 200 OK           | -                        |
+| 2   | POST   | `/api/books`      | Membuat buku baru       | 201 Created      | 422 Unprocessable Entity |
+| 3   | GET    | `/api/books/{id}` | Menampilkan detail buku | 200 OK           | 404 Not Found            |
+| 4   | PUT    | `/api/books/{id}` | Memperbarui data buku   | 200 OK           | 404 / 422                |
+| 5   | DELETE | `/api/books/{id}` | Menghapus data buku     | 204 No Content   | 404 Not Found            |
 
 Endpoint menggunakan pola REST dengan HTTP method yang disesuaikan dengan operasi terhadap resource `books`.
 
@@ -199,15 +199,9 @@ POST /api/books
 {
   "message": "The given data was invalid.",
   "errors": {
-    "title": [
-      "The title field is required."
-    ],
-    "author": [
-      "The author field is required."
-    ],
-    "isbn": [
-      "The isbn field is required."
-    ]
+    "title": ["The title field is required."],
+    "author": ["The author field is required."],
+    "isbn": ["The isbn field is required."]
   }
 }
 ```

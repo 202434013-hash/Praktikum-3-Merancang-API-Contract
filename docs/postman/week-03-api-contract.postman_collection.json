@@ -1,0 +1,143 @@
+{
+  "info": {
+    "_postman_id": "4129eb44-cf5e-40d1-8fa6-ebf14f9d5382",
+    "name": "Minggu 3 — API Contract",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58142712"
+  },
+  "item": [
+    {
+      "name": "books",
+      "item": [
+        {
+          "name": "Create Book",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/books",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "books"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Book - 201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/books",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "books"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"id\": 1,\r\n  \"title\": \"Pemrograman Web\",\r\n  \"author\": \"Budi Santoso\",\r\n  \"isbn\": \"978-1234567890\",\r\n  \"published_year\": 2025\r\n}"
+            },
+            {
+              "name": "422 Unprocessable Entity",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/books",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "books"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"message\": \"Validation failed\",\r\n  \"errors\": {\r\n    \"title\": [\"The title field is required.\"],\r\n    \"author\": [\"The author field is required.\"]\r\n  }\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "GET /api/books",
+              "host": [
+                "GET "
+              ],
+              "path": [
+                "api",
+                "books"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Books 200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"data\": [\r\n    {\r\n      \"id\": 1,\r\n      \"title\": \"Pemrograman Web\",\r\n      \"author\": \"Budi Santoso\",\r\n      \"isbn\": \"978-1234567890\",\r\n      \"published_year\": 2025\r\n    }\r\n  ]\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Get Book Detail",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": [
+        {
+          "name": "Get Book Detail  404 Not Found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,8 @@
 {
   "info": {
     "_postman_id": "4129eb44-cf5e-40d1-8fa6-ebf14f9d5382",
-    "name": "Minggu 3 — API Contract",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "58142712"
+    "name": "Minggu 3 \u2014 API Contract",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -13,7 +12,20 @@
           "name": "Create Book",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Pemrograman Web\",\n  \"author\": \"Budi Santoso\",\n  \"isbn\": \"978-1234567890\",\n  \"published_year\": 2025,\n  \"description\": \"Buku pembelajaran pemrograman web\",\n  \"category\": \"Teknologi\"\n}"
+            },
             "url": {
               "raw": "{{base_url}}/api/books",
               "host": ["{{base_url}}"],
@@ -25,37 +37,73 @@
               "name": "Create Book - 201 Created",
               "originalRequest": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Pemrograman Web\",\n  \"author\": \"Budi Santoso\",\n  \"isbn\": \"978-1234567890\",\n  \"published_year\": 2025,\n  \"description\": \"Buku pembelajaran pemrograman web\",\n  \"category\": \"Teknologi\"\n}"
+                },
                 "url": {
                   "raw": "{{base_url}}/api/books",
                   "host": ["{{base_url}}"],
                   "path": ["api", "books"]
                 }
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "text",
-              "header": null,
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
               "cookie": [],
-              "body": "{\r\n  \"id\": 1,\r\n  \"title\": \"Pemrograman Web\",\r\n  \"author\": \"Budi Santoso\",\r\n  \"isbn\": \"978-1234567890\",\r\n  \"published_year\": 2025\r\n}"
+              "body": "{\n  \"message\": \"Book created successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"title\": \"Pemrograman Web\",\n    \"author\": \"Budi Santoso\",\n    \"isbn\": \"978-1234567890\",\n    \"published_year\": 2025,\n    \"description\": \"Buku pembelajaran pemrograman web\",\n    \"category\": \"Teknologi\"\n  }\n}"
             },
             {
-              "name": "422 Unprocessable Entity",
+              "name": "Create Book - 422 Unprocessable Entity",
               "originalRequest": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"\",\n  \"author\": \"\",\n  \"isbn\": \"\",\n  \"published_year\": 0\n}"
+                },
                 "url": {
                   "raw": "{{base_url}}/api/books",
                   "host": ["{{base_url}}"],
                   "path": ["api", "books"]
                 }
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "text",
-              "header": null,
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
               "cookie": [],
-              "body": "{\r\n  \"message\": \"Validation failed\",\r\n  \"errors\": {\r\n    \"title\": [\"The title field is required.\"],\r\n    \"author\": [\"The author field is required.\"]\r\n  }\r\n}"
+              "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"title\": [\"The title field is required.\"],\n    \"author\": [\"The author field is required.\"],\n    \"isbn\": [\"The isbn field is required.\"]\n  }\n}"
             }
           ]
         },
@@ -63,61 +111,104 @@
           "name": "Get Books",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "GET /api/books",
-              "host": ["GET "],
+              "raw": "{{base_url}}/api/books",
+              "host": ["{{base_url}}"],
               "path": ["api", "books"]
             }
           },
           "response": [
             {
-              "name": "Get Books 200 OK",
+              "name": "Get Books - 200 OK",
               "originalRequest": {
                 "method": "GET",
-                "header": [],
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "raw": ""
+                  "raw": "{{base_url}}/api/books",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "books"]
                 }
               },
               "status": "OK",
               "code": 200,
-              "_postman_previewlanguage": "text",
-              "header": null,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
               "cookie": [],
-              "body": "{\r\n  \"data\": [\r\n    {\r\n      \"id\": 1,\r\n      \"title\": \"Pemrograman Web\",\r\n      \"author\": \"Budi Santoso\",\r\n      \"isbn\": \"978-1234567890\",\r\n      \"published_year\": 2025\r\n    }\r\n  ]\r\n}"
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"title\": \"Pemrograman Web\",\n      \"author\": \"Budi Santoso\",\n      \"isbn\": \"978-1234567890\",\n      \"published_year\": 2025,\n      \"description\": \"Buku pembelajaran pemrograman web\",\n      \"category\": \"Teknologi\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Book Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/books/999",
+              "host": ["{{base_url}}"],
+              "path": ["api", "books", "999"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Book Detail - 404 Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/books/999",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "books", "999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Book not found\"\n}"
             }
           ]
         }
       ]
-    },
+    }
+  ],
+  "variable": [
     {
-      "name": "Get Book Detail",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": ""
-        }
-      },
-      "response": [
-        {
-          "name": "Get Book Detail  404 Not Found",
-          "originalRequest": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": ""
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "text",
-          "header": null,
-          "cookie": [],
-          "body": ""
-        }
-      ]
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
     }
   ]
 }

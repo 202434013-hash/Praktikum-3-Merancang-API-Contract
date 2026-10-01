@@ -1,80 +1,277 @@
-# Praktikum Minggu 3 - API Contract
+1. Tujuan
 
-## 1. Tujuan
-Tujuan dari pengerjaan ini adalah untuk menerapkan desain API contract dan resource modelling pada project Library API. Hal ini dilakukan untuk mendefinisikan standar komunikasi antara client dan server, menentukan endpoint, metode HTTP, format request dan response, serta skenario penanganan error (error cases) sebelum tahap implementasi (coding) dilakukan.
+Tujuan dari pengerjaan Praktikum Minggu 3 adalah menerapkan API Contract dan resource modelling pada project Library API.
 
-## 2. Perubahan
-- Menambahkan dokumentasi mengenai API contract di `docs/api-contract.md` yang mendefinisikan main resource `books`.
-- Memperbarui file `docs/api-contract.md` dengan menyertakan endpoint matrix, rincian request dan response (200 OK, 201 Created, 404 Not Found, 422 Unprocessable Entity), serta penjelasan mengenai design decisions.
-- Memperbarui Postman collection untuk mencakup rancangan request dan examples dari API yang akan dibuat.
-- Mengubah struktur direktori dan menata file Postman agar lebih rapi dengan menyimpannya di `docs/postman/week-03-api-contract.postman_collection.json`.
+API Contract digunakan untuk mendefinisikan standar komunikasi antara client dan server, meliputi endpoint, HTTP method, format response, HTTP status code, serta skenario error.
 
-## 3. Endpoint atau Contract
-Main resource yang digunakan adalah `books`.
-Berikut adalah daftar contract/endpoint yang telah disepakati:
+Pada tahap ini, resource utama yang digunakan adalah books, dengan implementasi endpoint untuk mengambil seluruh data buku dan mengambil data buku berdasarkan ID.
 
-| No  | Method | Endpoint          | Fungsi                  | Success Response | Error Response           |
-| --- | ------ | ----------------- | ----------------------- | ---------------- | ------------------------ |
-| 1   | GET    | `/api/books`      | Menampilkan daftar buku | 200 OK           | -                        |
-| 2   | POST   | `/api/books`      | Membuat buku baru       | 201 Created      | 422 Unprocessable Entity |
-| 3   | GET    | `/api/books/{id}` | Menampilkan detail buku | 200 OK           | 404 Not Found            |
-| 4   | PUT    | `/api/books/{id}` | Memperbarui data buku   | 200 OK           | 404 / 422                |
-| 5   | DELETE | `/api/books/{id}` | Menghapus data buku     | 204 No Content   | 404 Not Found            |
+2. Perubahan
 
-**Keputusan Utama (Design Decisions) & Hubungannya dengan API Contract:**
-1. **Menggunakan `books` sebagai main resource:** Memfokuskan API contract pada satu entitas utama sehingga contract lebih sederhana, konsisten, dan mudah diimplementasikan pada skenario perpustakaan.
-2. **Menggunakan pola REST:** Penentuan metode HTTP (`GET`, `POST`, `PUT`, `DELETE`) sesuai operasi CRUD pada resource membuat API contract menjadi intuitif dan standar.
-3. **Standarisasi HTTP Status Code:** Memastikan respons yang diterima oleh client bersifat seragam, sehingga client tahu persis cara mengelola success (200, 201) dan error (404, 422).
+Perubahan yang dilakukan pada project meliputi:
 
-## 4. Bukti Pengujian
-Karena saat ini API Contract masih dalam tahap perancangan di Postman (mock/examples), berikut adalah hasil representasi dari Postman Examples yang dibuat:
+Menambahkan resource books pada API.
 
-**Success Response (201 Created - Create Book):**
-```json
+Menambahkan endpoint GET /api/books untuk mengambil seluruh data buku.
+
+Menambahkan endpoint GET /api/books/:id untuk mengambil data buku berdasarkan ID.
+
+Menambahkan response 200 OK untuk request yang berhasil.
+
+Menambahkan response 404 Not Found apabila buku dengan ID yang diminta tidak ditemukan.
+
+Menambahkan dokumentasi API Contract pada docs/api-contract.md.
+
+Memperbarui dokumentasi Praktikum Minggu 3.
+
+Menyiapkan Postman untuk melakukan pengujian endpoint.
+
+Menggunakan HTTP status code sesuai dengan kondisi response.
+
+3. Endpoint / API Contract
+
+Resource utama pada API adalah books.
+
+3.1 GET /api/books
+
+Digunakan untuk mengambil seluruh data buku.
+
+Method:
+
+GET /api/books
+
+Response berhasil: 200 OK
+
+Contoh response:
+
 {
-  "message": "Book created successfully",
+  "status": 200,
+  "message": "Books retrieved successfully",
+  "data": [
+    {
+      "id": 1,
+      "title": "Laskar Pelangi",
+      "author": "Andrea Hirata"
+    },
+    {
+      "id": 2,
+      "title": "Bumi",
+      "author": "Tere Liye"
+    }
+  ]
+}
+
+3.2 GET /api/books/:id
+
+Digunakan untuk mengambil satu data buku berdasarkan ID.
+
+Method:
+
+GET /api/books/1
+
+Response berhasil: 200 OK
+
+Contoh response:
+
+{
+  "status": 200,
+  "message": "Book retrieved successfully",
   "data": {
     "id": 1,
-    "title": "Pemrograman Web",
-    "author": "Budi Santoso",
-    "isbn": "978-1234567890",
-    "published_year": 2025,
-    "description": "Buku pembelajaran pemrograman web",
-    "category": "Teknologi"
+    "title": "Laskar Pelangi",
+    "author": "Andrea Hirata"
   }
 }
-```
 
-## 5. Error Case
+3.3 Error Case - Book Tidak Ditemukan
 
-**Error Response (422 Unprocessable Entity - Validation Failed on POST):**
-Jika client tidak mengirimkan field yang diwajibkan (misalnya `title` atau `author`):
-```json
+Apabila ID buku tidak tersedia, API mengembalikan status 404 Not Found.
+
+Contoh request:
+
+GET /api/books/999
+
+Response:
+
 {
-  "message": "The given data was invalid.",
-  "errors": {
-    "title": ["The title field is required."],
-    "author": ["The author field is required."],
-    "isbn": ["The isbn field is required."]
-  }
-}
-```
-
-**Error Response (404 Not Found - Get Detail):**
-Jika client meminta buku dengan ID yang tidak terdapat dalam sistem:
-```json
-{
+  "status": 404,
   "message": "Book not found"
 }
-```
 
-## 6. Kesimpulan
-Pembuatan API Contract dan resource modelling ini merupakan langkah krusial sebelum melakukan implementasi API. Contract ini akan menjamin bahwa client dan server memiliki pemahaman yang sama terhadap struktur endpoint, parameter, format request, format response, dan penanganan status error. Hal ini akan meminimalisir risiko terjadinya kendala komunikasi data.
+3.4 Ringkasan Endpoint
 
-## 7. Referensi
-- Materi Praktikum Minggu 3 — API Contract
-- Dokumentasi HTTP Status Codes
-- Dokumentasi Postman mengenai Collections dan Examples
+Method
 
-## 8. Deklarasi Penggunaan AI
-Dalam pengerjaan praktikum ini, AI digunakan untuk menyusun, merapikan, dan merangkum hasil perancangan API contract menjadi format dokumentasi Markdown yang lebih terstruktur. AI juga memberikan referensi terkait format JSON untuk success dan error response sesuai dengan panduan standar REST API.
+Endpoint
+
+Status Berhasil
+
+Error
+
+GET
+
+/api/books
+
+200
+
+-
+
+GET
+
+/api/books/:id
+
+200
+
+404
+
+Pada tahap ini, endpoint POST, PUT, dan DELETE belum diimplementasikan, sehingga belum dicantumkan sebagai endpoint yang sudah diuji.
+
+4. Design Decisions
+
+4.1 Books sebagai Resource Utama
+
+Resource utama yang digunakan adalah books karena project merupakan Library API yang berfokus pada pengelolaan data buku.
+
+4.2 Menggunakan REST API
+
+Endpoint menggunakan pola REST sederhana:
+
+/api/books
+/api/books/:id
+
+Collection books digunakan untuk mengakses kumpulan data, sedangkan :id digunakan untuk mengakses satu resource tertentu.
+
+4.3 Menggunakan HTTP Status Code
+
+API menggunakan HTTP status code untuk menunjukkan hasil request:
+
+200 OK - request berhasil.
+
+404 Not Found - resource buku tidak ditemukan.
+
+Penggunaan status code tersebut membuat client dapat mengetahui hasil request secara jelas.
+
+4.4 Response JSON
+
+Response API menggunakan format JSON agar mudah digunakan oleh client seperti Postman maupun aplikasi frontend.
+
+5. Bukti Pengujian
+
+Pengujian dilakukan menggunakan Postman.
+
+5.1 Success Case
+
+Request:
+
+GET http://localhost:3000/api/books
+
+Expected result:
+
+Status: 200 OK
+
+Response:
+
+{
+  "status": 200,
+  "message": "Books retrieved successfully",
+  "data": [
+    {
+      "id": 1,
+      "title": "Laskar Pelangi",
+      "author": "Andrea Hirata"
+    },
+    {
+      "id": 2,
+      "title": "Bumi",
+      "author": "Tere Liye"
+    }
+  ]
+}
+
+Bukti screenshot Postman:
+
+Tempelkan screenshot hasil request GET /api/books di bawah bagian ini.
+
+Contoh:
+
+[Screenshot Postman - GET /api/books - 200 OK]
+
+5.2 Error Case
+
+Request:
+
+GET http://localhost:3000/api/books/999
+
+Expected result:
+
+Status: 404 Not Found
+
+Response:
+
+{
+  "status": 404,
+  "message": "Book not found"
+}
+
+Bukti screenshot Postman:
+
+Tempelkan screenshot hasil request GET /api/books/999 di bawah bagian ini.
+
+Contoh:
+
+[Screenshot Postman - GET /api/books/999 - 404 Not Found]
+
+6. Error Case
+
+Error case yang diterapkan pada tahap ini adalah ketika client meminta data buku menggunakan ID yang tidak tersedia.
+
+Contoh:
+
+GET /api/books/999
+
+API akan mencari buku berdasarkan ID tersebut. Jika data tidak ditemukan, server mengembalikan:
+
+{
+  "status": 404,
+  "message": "Book not found"
+}
+
+Penggunaan 404 Not Found menunjukkan bahwa endpoint dapat diakses, tetapi resource yang diminta tidak tersedia.
+
+7. Kesimpulan
+
+Pada Praktikum Minggu 3 telah diterapkan API Contract dan resource modelling pada Library API.
+
+Resource yang digunakan adalah books, dengan dua endpoint yang telah diimplementasikan dan diuji, yaitu:
+
+GET /api/books
+
+GET /api/books/:id
+
+Pengujian dilakukan menggunakan Postman dengan success case 200 OK dan error case 404 Not Found.
+
+Dengan adanya API Contract, struktur endpoint, HTTP method, response, dan error handling menjadi lebih jelas serta dapat digunakan sebagai acuan antara client dan server.
+
+8. Referensi
+
+Express.js Documentation - Routing dan HTTP response.
+
+MDN Web Docs - HTTP request methods dan HTTP status codes.
+
+Dokumentasi project Library API.
+
+Postman Documentation - API testing.
+
+9. Deklarasi Penggunaan AI
+
+Dalam pengerjaan tugas ini,  saya menggunakan AI digunakan sebagai alat bantu untuk:
+
+memahami konsep API Contract dan resource modelling;
+
+membantu menyusun struktur dokumentasi;
+
+membantu memperbaiki struktur endpoint dan response API;
+
+membantu melakukan pengecekan konsistensi antara implementasi API dan dokumentasi.
+
+Implementasi, pengujian menggunakan Postman, serta hasil akhir project dilakukan dan diverifikasi pada repository project.
